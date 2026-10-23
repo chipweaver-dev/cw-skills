@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "language": "zh-CN",
+  "title": "{{TITLE_JSON}}",
+  "title_alternatives": [],
+  "short_description": "",
+  "long_description": "",
+  "hashtags": [],
+  "tags": [],
+  "category": "",
+  "cover": {
+    "16x9": "covers/cover_16x9.png",
+    "9x16": "covers/cover_9x16.png"
+  },
+  "media": {
+    "master": "film/master.mp4",
+    "duration_seconds": 0,
+    "duration_human": "00:00",
+    "width": 0,
+    "height": 0,
+    "fps": 30,
+    "loudness": {
+      "integrated_lufs": 0,
+      "true_peak_dbfs": 0,
+      "lra_lu": 0
+    }
+  },
+  "chapters": [],
+  "credits": {}
+}

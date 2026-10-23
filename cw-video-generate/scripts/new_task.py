@@ -31,6 +31,7 @@ FILES = (
     ("toolbox_README.md", "production/{version}/toolbox/README.md"),
     ("run.bat", "production/{version}/run.bat"),
     ("post-production_README.md", "post-production/README.md"),
+    ("publish_metadata.json", "post-production/publish/metadata.json"),
 )
 
 DIRS = (
@@ -39,6 +40,7 @@ DIRS = (
     "production/{version}/toolbox",
     "post-production/audio/film",
     "post-production/web/src",
+    "post-production/publish",
     ".tmp",
 )
 

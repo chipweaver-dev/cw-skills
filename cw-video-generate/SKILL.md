@@ -104,7 +104,7 @@ Vite/React 播放页 → 录屏 → 成片
 5. 整片一次 TTS → EBU R128 归一化 → 音频边界 → timeline.json + subtitles.json。
 6. 起播放页（Vite/React/TS），用 ?t= 定帧评审；CDP 截图与量框。
 7. 合成/授权音乐 → ducking 混音 → 终混 −16 LUFS。
-8. 录屏 1080x1920/30 fps，出 MP4、封面、字幕与元数据；跑交付检查表。
+8. 录屏 1080x1920/30 fps，出 MP4、封面、字幕；发布元数据（标题/简介/标签/章节）写进 `post-production/publish/metadata.json`；跑交付检查表。
 ```
 
 常用命令（在 skill 目录下执行；参数以实际项目为准）：
@@ -113,6 +113,7 @@ Vite/React 播放页 → 录屏 → 成片
 python scripts/new_task.py ./my_task --title "My Topic"
 python scripts/check_ascii.py ./my_task
 python scripts/check_film.py --root ./my_task --audio ./my_task/post-production/audio/film/film_full_scored.mp3
+python scripts/check_publish.py --root ./my_task --video ./my_task/post-production/film/master.mp4
 node scripts/cdp_capture.mjs --url http://127.0.0.1:5180/ --times 0,26.3,62.2 --out ./my_task/.tmp/shots
 ```
 
@@ -144,6 +145,7 @@ node scripts/cdp_capture.mjs --url http://127.0.0.1:5180/ --times 0,26.3,62.2 --
 | `scripts/check_ascii.py` | 扫非 ASCII 工程文件 |
 | `scripts/check_film.py` | 校验 timeline / subtitles / 音频时长一致性 |
 | `scripts/check_secrets.py` | 扫疑似凭证，交付前必跑 |
+| `scripts/check_publish.py` | 校验发布元数据与成片是否一致（片长、章节、话题、封面） |
 | `scripts/cdp_capture.mjs` | 通过 Chrome DevTools Protocol 定帧截图与量框 |
 | `scripts/*.py` 源码 | 仅维护升级时阅读；日常使用看 `--help` |
 
@@ -160,3 +162,4 @@ node scripts/cdp_capture.mjs --url http://127.0.0.1:5180/ --times 0,26.3,62.2 --
 |---|---|---|
 | 1.0.0 | 2026-10-17 | 初始版本：从 DRAM 子系统层次结构视频项目抽象出 17 步 / 3 Gate 流程、音频主导时钟、透明素材 + 页面合成、混音与踩坑库 |
 | 1.0.1 | 2026-10-23 | 面包屑契约补全（精炼关键词 + 0-based 高亮，见 `pipeline.md` §4.1 / §6.5）；新增踩坑 2.12–2.13、4.11–4.12、5.11、6.6–6.7、7.14、8.6–8.7；新增 §5.7 画面返工不重录旁白；`workflow.md` 返工表补面包屑行；`check_ascii.py` 跳过 `.tmp`；`check_film.py` 校验 `crumb` 越界与"标题当关键词" |
+| 1.0.2 | 2026-10-23 | 发布元数据成为交付物：新增 `pipeline.md` §9.1（`post-production/publish/metadata.json` 字段与派生规则）、`check_publish.py`、模板 `assets/templates/publish_metadata.json`（`new_task.py` 同步生成）；`workflow.md` 步骤 17 与返工表补元数据行；`checklists.md` §7 拆出 5 项；新增踩坑 8.8 与分诊行 |

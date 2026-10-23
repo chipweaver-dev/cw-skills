@@ -604,6 +604,30 @@ ffmpeg -y -i recording.mkv \
 - 交付前检查首帧、尾帧、黑帧、静音、章节卡、片尾卡。
 - 封面单独出：竖屏 1080×1920，主体在中部，文字在信息流缩略图下可读。
 
+### 9.1 发布元数据
+
+标题、简介、标签、章节时间戳属于交付物，不是发布当天的即兴写作。落一份
+`post-production/publish/metadata.json`，作为这些文案的唯一来源；平台后台、封面文案、
+README 与发布清单都从它取，不要各写一套（写两套就会漂移）。
+
+| 字段 | 内容 | 来源 |
+|---|---|---|
+| `title` | 主标题，含一个能复述的钩子 | brief / 片名卡 |
+| `title_alternatives` | 1–2 个备选，按平台调性替换 | 编辑 |
+| `short_description` | 约 100 字，含 5 个 `#` 话题 | 正文摘要 + `hashtags` |
+| `long_description` | 平台正文，含事实口径说明 | 脚本 + 事实表 |
+| `hashtags` | 3–8 个 `#` 话题，上屏用 | 选题关键词 |
+| `tags` | 检索标签，可与话题不同 | 选题关键词 |
+| `cover` | 横竖封面路径 | `covers/` |
+| `media` | 母版路径、时长、分辨率、帧率、实测响度 | `timeline.json` / ffprobe |
+| `chapters` | `mm:ss` 起点 + 章节标题 | `timeline.json` 各段 `t0` |
+| `credits` | 旁白音色、来源表、素材许可出处 | research / resource |
+
+- 时长与章节起点**派生**，不手抄；成片返工导致时长或分段变化时重算。
+- 简介里的每个数字都要能回到事实表；口径边界（"参考实现指标"还是"硅测量"）在长简介里写明。
+- 只改文案不触发重录；文案改完不必重出画面。
+- 校验：`python <skill>/scripts/check_publish.py --root <task_root>`，可加 `--video` 核对 MP4 实际时长。
+
 ## 10. 凭证与隐私
 
 - TTS/API key 只从环境变量或项目 `.env` 读取，例如 `DOUBAO_SPEECH_API_KEY`（变量名可换，值绝不入仓）。
