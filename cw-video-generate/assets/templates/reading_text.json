@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "created": "{{DATE}}",
+  "purpose": "Reading layer: replace only engine mispronunciations; on-screen text stays canonical.",
+  "how_it_is_used": [
+    "Validate each rule against the whole film before synthesis; fail before the network call if the count differs.",
+    "Write the substituted text to .tmp/narration/film/film_reading.txt; keep the canonical text for comparison.",
+    "Map sentence-frame text back to canonical before writing subtitles."
+  ],
+  "alignment_note": "Substitutions can change character count, so align by sentence frame, not by character position.",
+  "substitutions": [],
+  "example_rule": {
+    "id": "p-01",
+    "canonical": "DRAM",
+    "reading": "D ram",
+    "expect_occurrences": 1,
+    "issue": "The engine spells out all-caps acronyms.",
+    "why_this_reading": "Lowercase ram is read as a word; the leading D stays a letter.",
+    "note": "On screen it remains DRAM."
+  }
+}

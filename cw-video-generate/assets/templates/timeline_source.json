@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "title": "{{TITLE_JSON}}",
+    "version": "{{VERSION}}",
+    "built": "{{DATE}}",
+    "source": "pre-production/{{VERSION}}/pre-production.md",
+    "source_note": "beat times and narration text are transcribed from the approved script; make_film_narration.py replaces them with the TTS clock",
+    "canvas": [
+      1080,
+      1920
+    ],
+    "fps": 30,
+    "safe_x": 120,
+    "duration": 60.0,
+    "output": "post-production/timeline.json",
+    "crumb_nodes": [
+      "whole",
+      "part",
+      "cell"
+    ],
+    "clock_note": "authored time only; the broadcast clock comes from make_film_narration.py",
+    "align_note": "segments may be stretched inside their own boundaries; authored offsets are kept for review"
+  },
+  "keywords": {
+    "example": {
+      "term": "Example",
+      "gloss": "one short explanation"
+    }
+  },
+  "segments": [
+    {
+      "id": "S1",
+      "title": "Segment title",
+      "scene": "A",
+      "pack": "S1",
+      "pack_status": "planned",
+      "budget": 30.0,
+      "beats": [
+        {
+          "id": "s1b1",
+          "authored": [
+            0.0,
+            8.0
+          ],
+          "vo": "Canonical narration text for this beat.",
+          "crumb": 0,
+          "keywords": [],
+          "stage": [
+            {
+              "pack": "S1",
+              "beat": "b1",
+              "at": 0.0
+            }
+          ]
+        },
+        {
+          "id": "s1b2",
+          "authored": [
+            8.0,
+            18.0
+          ],
+          "vo": "Second beat narration.",
+          "crumb": 1,
+          "keywords": [
+            {
+              "key": "example",
+              "at": 1.5
+            }
+          ],
+          "stage": [
+            {
+              "pack": "S1",
+              "beat": "b2",
+              "at": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Second segment",
+      "scene": "B",
+      "pack": "S2",
+      "pack_status": "planned",
+      "budget": 30.0,
+      "beats": [
+        {
+          "id": "s2b1",
+          "authored": [
+            0.0,
+            12.0
+          ],
+          "vo": "Second segment narration.",
+          "crumb": 1,
+          "keywords": [],
+          "stage": [
+            {
+              "pack": "S2",
+              "beat": "b1",
+              "at": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "G1",
+      "type": "drill",
+      "at": 30.0,
+      "from": "S1",
+      "to": "S2",
+      "target": "transition target",
+      "sfx": "whoosh"
+    }
+  ]
+}
