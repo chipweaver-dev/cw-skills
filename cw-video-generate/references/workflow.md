@@ -17,7 +17,7 @@
 │   ├── resource/                  # 原始素材：PDF、图片、录屏、品牌资产
 │   └── review_log.md              # 全局评审日志
 ├── production/
-│   └── v0.2/
+│   └── v0.2/                      # 号与 pre-production 对齐；可以没有 v0.1
 │       ├── toolbox/               # 单功能脚本 + spec JSON + reading_text.json
 │       ├── S1/                    # 每个叙事单元一个素材包
 │       │   ├── assets/
@@ -37,8 +37,12 @@
 
 ### 1.2 版本规则
 
-- 前期与制作各自带版本：`pre-production/v0.2` 与 `production/v0.2` 可以不同步；但 `timeline_source.json` 必须注明它读的是哪个 pre-production 版本。
-- 已批准版本只读。返工新建版本目录，把上一版复制过去再改；`review_log.md` 写清"为什么返工、改了哪些段"。
+- **版本号是成片的版本，不是阶段的版本**：`pre-production` / `production` / `post-production` 用同一个号。`pre-production` 定到 v0.2，`production` 就是 `v0.2`，`post-production` 也是 `v0.2`。
+- **后面的阶段允许没有 v0.1**：直接从 Gate 1 批准的号起步（`pre-production/v0.2` 批准 → 第一个 `production` 目录就是 `v0.2`，不补 `v0.1`）。v0.1 只在它真实存在时保留，不为了"凑齐"而建空目录。
+- **升版本三段一起升**：前期返工到 `v0.3` 时，后续工作开 `production/v0.3`（后期同步到 `post-production/v0.3`，或在其版本字段里记 `v0.3`），不在 `v0.2` 目录里热改；`v0.2` 保持可交付快照。已批准版本只读。
+- 后期只发布一版时可以不分版本目录，但版本号必须写在 `README.md` 与 `timeline.json` 的 `version` 里，且与前置阶段同号。
+- `timeline_source.json` / `timeline.json` 的 `source` / `version` 字段必须与所在目录版本一致，跨版本引用要显式写出（见 `pitfalls.md` 7.5）。
+- `review_log.md` 写清"为什么返工、改了哪些段"，Gate 行记的 `Version` 就是当次成片版本号。
 - `.tmp` 只放临时产物：CDP 截图、解码探针、试混、对比图。任何需要复现的文件必须移入正式目录。
 - 输出文件不写绝对路径；脚本以 `--root <task_root>` 解析，便于整个任务搬移。
 
@@ -387,6 +391,7 @@ S2c/
 
 | 上游改动 | 必须重跑 | 可复用 |
 |---|---|---|
+| 前期升版本（v0.2 → v0.3） | 新建 `production/v0.3` 与后期对应版本；TTS、timeline、字幕按新版重跑 | 上一版已批准素材（复制过去后重新绑定并校验） |
 | 改一句旁白 | 整片 TTS、归一化、边界、timeline、subtitles | 素材、页面、音乐结构 |
 | 改段落顺序/增删段 | 整片 TTS、timeline、字幕、转场、音乐 riser | 单段素材（需重绑 ID） |
 | 改视觉规范 | 页面样式、预览静帧、contact sheet | 旁白、时间轴 |

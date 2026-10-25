@@ -6,6 +6,11 @@ pre-production skeleton, review log, reading-text schema, timeline-source
 schema, and a run.bat placeholder. Asset scripts and the React page are
 built per task (see references/pipeline.md).
 
+The version number belongs to the film, not to the phase: the same --version is
+used for pre-production and production directories. When a task is created
+after pre-production is already approved, pass that approved version (a later
+phase may legitimately start at v0.2 with no v0.1).
+
 Usage:
     python new_task.py ./my_task --title "My Topic"
     python new_task.py ./my_task --title "My Topic" --version v0.2 --force
@@ -62,7 +67,9 @@ def main():
     parser = argparse.ArgumentParser(description="Create a video-task skeleton.")
     parser.add_argument("task_dir", help="target task root")
     parser.add_argument("--title", required=True, help="video title")
-    parser.add_argument("--version", default="v0.1", help="initial version (default v0.1)")
+    parser.add_argument("--version", default="v0.1",
+                        help="film version shared by pre-production and production "
+                             "(default v0.1)")
     parser.add_argument("--force", action="store_true", help="overwrite existing files")
     args = parser.parse_args()
 

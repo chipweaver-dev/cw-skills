@@ -69,6 +69,7 @@ Vite/React 播放页 → 录屏 → 成片
 - 整片只发一次 TTS 请求（或每个叙事单元一次并验证音色一致），避免逐拍请求造成的音色、语速、情绪漂移。
 - 整片只做一次终混；改音乐不重录旁白，改旁白不重做音乐。
 - 返工开新版本目录（`v0.2`、`v0.3`），不覆盖已批准版本；`review_log.md` 记录每次批准与返工原因。
+- **版本号跨阶段对齐**：版本号属于成片，不属于阶段。`pre-production` 是 v0.2，`production`、`post-production` 就都是 v0.2；后面的阶段允许没有 v0.1，从前一阶段批准的号直接起步。
 
 ### 3.5 门禁评审，不一次性跑完
 
@@ -131,6 +132,7 @@ node scripts/cdp_capture.mjs --url http://127.0.0.1:5180/ --times 0,26.3,62.2 --
 10. **不跳过评审**：每个 Gate 必须有 `review.md` + `review_log.md`；未 Approved 不进入下一阶段。
 11. **不交付未验证的响度**：旁白/终混必须实测 −16 LUFS、TP ≤ −1.5 dBTP；真峰超标先重跑 `--dynamic`。
 12. **不越过竖屏安全区**：顶部平台 UI、底部字幕/按钮区、右栏互动区都要留白；禁止横屏构图直接裁切。
+13. **版本号跨阶段对齐**：`pre-production` / `production` / `post-production` 用同一个成片版本号；后段允许没有 v0.1，但不许各阶段各编一套号。
 
 ## 7. 参考索引
 
@@ -163,3 +165,4 @@ node scripts/cdp_capture.mjs --url http://127.0.0.1:5180/ --times 0,26.3,62.2 --
 | 1.0.0 | 2026-10-17 | 初始版本：从 DRAM 子系统层次结构视频项目抽象出 17 步 / 3 Gate 流程、音频主导时钟、透明素材 + 页面合成、混音与踩坑库 |
 | 1.0.1 | 2026-10-23 | 面包屑契约补全（精炼关键词 + 0-based 高亮，见 `pipeline.md` §4.1 / §6.5）；新增踩坑 2.12–2.13、4.11–4.12、5.11、6.6–6.7、7.14、8.6–8.7；新增 §5.7 画面返工不重录旁白；`workflow.md` 返工表补面包屑行；`check_ascii.py` 跳过 `.tmp`；`check_film.py` 校验 `crumb` 越界与"标题当关键词" |
 | 1.0.2 | 2026-10-23 | 发布元数据成为交付物：新增 `pipeline.md` §9.1（`post-production/publish/metadata.json` 字段与派生规则）、`check_publish.py`、模板 `assets/templates/publish_metadata.json`（`new_task.py` 同步生成）；`workflow.md` 步骤 17 与返工表补元数据行；`checklists.md` §7 拆出 5 项；新增踩坑 8.8 与分诊行 |
+| 1.0.3 | 2026-10-24 | 版本号跨阶段对齐：`pre-production` / `production` / `post-production` 共用一个成片版本号，后段允许缺 v0.1（`workflow.md` §1.2、§7 返工表；`pitfalls.md` 7.5；`checklists.md` §1；`new_task.py` 版本参数说明） |

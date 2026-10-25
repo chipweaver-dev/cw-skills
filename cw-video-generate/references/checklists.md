@@ -15,6 +15,7 @@
 - [ ] 是否需要音乐已确认（不要默认省略）
 - [ ] 凭证来源已确认（环境变量/项目 `.env`），且不会进入产物
 - [ ] `pre-production/`、`production/<version>/toolbox/`、`post-production/`、`.tmp/` 已建立
+- [ ] 各阶段版本号一致（`pre-production` v0.2 → `production` v0.2；后段允许没有 v0.1，但不许各编一套号）
 - [ ] 原始素材已就位并只读；brief 引用路径逐一核对存在
 
 ## 2. Gate 1：Pre-Production Review

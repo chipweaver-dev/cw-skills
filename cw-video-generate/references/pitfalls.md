@@ -606,11 +606,15 @@
 
 ### 7.5 版本混用
 
-**症状**：页面读 v0.2 的 timeline，素材却是 v0.1 的。
+**症状**：页面读 v0.2 的 timeline，素材却是 v0.1 的；或 `pre-production/v0.2` 已批准，
+`production/` 还叫 `v0.1`，两边对不上号。
 
-**根因**：目录没有版本隔离，或脚本默认路径写死。
+**根因**：把版本号当成"阶段自己的编号"，各阶段各编一套；或目录没有版本隔离，
+脚本默认路径写死。
 
-**修法**：版本目录隔离；`timeline.json` 的 `source` 指向对应 pre-production 版本；`run.bat` 显式传 `--root`/版本。
+**修法**：版本号按成片对齐——`pre-production` / `production` / `post-production` 同号，
+后面的阶段允许没有 v0.1，从前一阶段批准的号直接起步；版本目录隔离；`timeline.json`
+的 `source` / `version` 指向同号 pre-production；`run.bat` 显式传 `--root`/版本。
 
 ### 7.6 `.tmp` 里的东西被当成交付物
 
